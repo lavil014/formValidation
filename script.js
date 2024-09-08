@@ -1,3 +1,39 @@
+const form = document.getElementById('my-form');
+const btn = document.getElementById('submit-btn');
+let labels = document.querySelectorAll('label');
+const inputs = document.querySelectorAll('input');
+
+
+inputs[0].addEventListener('input',()=>{
+  let name = document.getElementById('first-name').value.trim();
+  let namePattern = /^[A-Za-z]+$/;
+  
+
+  if(name === '' || !namePattern.test(name)){
+    labels[0].innerText = 'Enter a valid name';
+    labels[0].style.color = 'red';
+    } 
+    else{
+      labels[0].innerText = 'Valid name, move to the next input.';
+      labels[0].style.color = 'green';
+    }
+})
+
+inputs[1].addEventListener('input',()=>{
+  let lastName = inputs[1].value.trim();
+  let lastNamePattern = /^[A-Za-z]+$/;
+
+  if(lastName === '' || !lastNamePattern.test(lastName)){
+    labels[1].innerText = 'Enter a valid name';
+    labels[1].style.color = 'red';
+    } 
+    else{
+      labels[1].innerText = 'Valid name, move to the next input.';
+      labels[1].style.color = 'green';
+    }
+  })
+
+
 /*
 
 class DOMElements {
@@ -23,27 +59,6 @@ class DOMElements {
 
 const singUpElements = new DOMElements ('first-name','last-name','username','e-mail','password','submit-btn');*/
 
-
-
-const form = document.getElementById('my-form');
-const btn = document.getElementById('submit-btn');
-let labels = document.querySelectorAll('label');
-const nameInput = document.getElementById('first-name');
-
-nameInput.addEventListener('input',()=>{
-  let name = document.getElementById('first-name').value.trim();
-  let namePattern = /^[A-Za-z]+$/;
-  
-
-  if(name === '' || !namePattern.test(name)){
-    labels[0].innerText = 'Enter a valid name';
-    labels[0].style.color = 'red';
-    } 
-    else{
-      labels[0].innerText = 'Valid name, move to the next input.';
-      labels[0].style.color = 'green';
-    }
-})
 
 /*
 form.addEventListener('submit', (event)=>{
