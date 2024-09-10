@@ -1,10 +1,6 @@
-const form = document.getElementById('my-form');
-const btn = document.getElementById('submit-btn');
-let labels = document.querySelectorAll('label');
-const inputs = document.querySelectorAll('input');
+import { form, inputs, labels, btn } from "./consts.js";
 
-
-inputs[0].addEventListener('input',()=>{
+const validateName = ()=>{
   let name = document.getElementById('first-name').value.trim();
   let namePattern = /^[A-Za-z]+$/;
   
@@ -17,9 +13,9 @@ inputs[0].addEventListener('input',()=>{
       labels[0].innerText = 'Valid name, move to the next input.';
       labels[0].style.color = 'green';
     }
-})
+}
 
-inputs[1].addEventListener('input',()=>{
+const validateLastName = ()=>{
   let lastName = inputs[1].value.trim();
   let lastNamePattern = /^[A-Za-z]+$/;
 
@@ -31,8 +27,10 @@ inputs[1].addEventListener('input',()=>{
       labels[1].innerText = 'Valid name, move to the next input.';
       labels[1].style.color = 'green';
     }
-  })
-
+  }
+ 
+inputs[0].addEventListener('input', validateName)
+inputs[1].addEventListener('input', validateLastName);
 
 /*
 
