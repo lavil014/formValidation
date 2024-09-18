@@ -53,13 +53,13 @@
   }
 
   .fail{
-   color: red;
-   border: solid red;
+   color: rgb(232, 7, 7);
+   border: solid rgb(249, 11, 11);
    outline: none;
   }
 
   .success{
-    color: green;
-    border: solid green;
+    color: #00ec5a;
+    border: solid #00ec5a;
     outline: none;
   }

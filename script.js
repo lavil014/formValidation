@@ -36,8 +36,24 @@ const validateLastName = ()=>{
     }
   }
  
+const validateEmail = ()=>{
+  let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  let email = inputs[3].value.trim();
+
+  if( email === '' || !email.test(emailPattern)){
+    labels[3].innerText = 'Enter a valid email address';
+    labels[3].style.color = 'red';
+  }else{
+    
+    labels[3].innerText = 'Valid email address';
+    labels[3].style.color = 'green';
+  }
+}
+
+
 inputs[0].addEventListener('input', validateName)
 inputs[1].addEventListener('input', validateLastName);
+inputs[3].addEventListener('input',validaEmail);
 
 
 /*
