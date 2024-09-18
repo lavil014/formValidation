@@ -1,4 +1,7 @@
-import { form, inputs, labels, btn } from "./consts.js";
+const form = document.getElementById('my-form');
+const btn = document.getElementById('submit-btn');
+let labels = document.querySelectorAll('label');
+const inputs = document.querySelectorAll('input');
 
 const validateName = ()=>{
   let name = document.getElementById('first-name').value.trim();
@@ -31,6 +34,10 @@ const validateLastName = ()=>{
  
 inputs[0].addEventListener('input', validateName)
 inputs[1].addEventListener('input', validateLastName);
+
+btn.addEventListener('click', ()=>{
+  console.log('This event is working');
+})
 
 /*
 

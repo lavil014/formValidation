@@ -51,3 +51,15 @@
     padding: 0.7rem;
     border-radius: 0.2rem;
   }
+
+  .fail:focus{
+   color: red;
+   border: solid red;
+   outline: none;
+  }
+
+  .success:focus{
+    color: green;
+    border: solid green;
+    outline: none;
+  }
