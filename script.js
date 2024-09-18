@@ -11,10 +11,12 @@ const validateName = ()=>{
   if(name === '' || !namePattern.test(name)){
     labels[0].innerText = 'Enter a valid name';
     labels[0].style.color = 'red';
+    inputs[0].classList.add('fail');
     } 
     else{
       labels[0].innerText = 'Valid name, move to the next input.';
       labels[0].style.color = 'green';
+      inputs[0].classList.add('success');
     }
 }
 
@@ -25,19 +27,18 @@ const validateLastName = ()=>{
   if(lastName === '' || !lastNamePattern.test(lastName)){
     labels[1].innerText = 'Enter a valid name';
     labels[1].style.color = 'red';
+    inputs[1].classList.add('fail');
     } 
     else{
       labels[1].innerText = 'Valid name, move to the next input.';
       labels[1].style.color = 'green';
+      inputs[1].classList.add('success');
     }
   }
  
 inputs[0].addEventListener('input', validateName)
 inputs[1].addEventListener('input', validateLastName);
 
-btn.addEventListener('click', ()=>{
-  console.log('This event is working');
-})
 
 /*
 

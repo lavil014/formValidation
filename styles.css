@@ -52,13 +52,13 @@
     border-radius: 0.2rem;
   }
 
-  .fail:focus{
+  .fail{
    color: red;
    border: solid red;
    outline: none;
   }
 
-  .success:focus{
+  .success{
     color: green;
     border: solid green;
     outline: none;
