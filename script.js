@@ -4,6 +4,7 @@ let labels = document.querySelectorAll('label');
 const inputs = document.querySelectorAll('input');
 let defaultLabelTexts = Array.from(labels).map(label => label.innerText);
 
+
 const validateName = ()=>{
 
   let name = document.getElementById('first-name').value.trim();
@@ -152,9 +153,6 @@ inputs[3].addEventListener('input', validateEmail);
 inputs[4].addEventListener('input', validatePassword);
 
 
-const showMessage = (setTimeout(() => {
-  console.log('It works')
-}, 3000));
 
 /*
 
