@@ -63,3 +63,7 @@
     border: solid #00ec5a;
     outline: none;
   }
+
+  .valid-password{
+    font-size: 0.5rem;
+  }

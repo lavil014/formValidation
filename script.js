@@ -82,11 +82,37 @@ const validateEmail = ()=>{
   }
 }
 
+const validatePassword = () => {
+  let password = inputs[4].value.trim();
+  let passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+  if (password === '') {
+    labels[4].classList.remove('valid-password');
+    labels[4].innerText = 'Password cannot be empty';
+    labels[4].style.color = 'red';
+    inputs[4].classList.remove('success');
+    inputs[4].classList.add('fail');
+  } else if (!passwordPattern.test(password)) {
+    labels[4].innerText = '8 characters long,uppercase, lowercase,a number, and a special character';
+    labels[4].classList.add('valid-password')
+    labels[4].style.color = 'red';
+    inputs[4].classList.remove('success');
+    inputs[4].classList.add('fail');
+  } else {
+    labels[4].classList.remove('valid-password');
+    labels[4].innerText = 'Valid password';
+    labels[4].style.color = 'green';
+    inputs[4].classList.remove('fail');
+    inputs[4].classList.add('success');
+  }
+};
+
 
 inputs[0].addEventListener('input', validateName)
 inputs[1].addEventListener('input', validateLastName);
 inputs[2].addEventListener('input', validateUserName);
 inputs[3].addEventListener('input', validateEmail);
+inputs[4].addEventListener('input', validatePassword);
 
 
 /*
