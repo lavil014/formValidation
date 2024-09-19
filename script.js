@@ -2,6 +2,7 @@ const form = document.getElementById('my-form');
 const btn = document.getElementById('submit-btn');
 let labels = document.querySelectorAll('label');
 const inputs = document.querySelectorAll('input');
+let defaultLabelTexts = Array.from(labels).map(label => label.innerText);
 
 const validateName = ()=>{
 
@@ -20,8 +21,14 @@ const validateName = ()=>{
       labels[0].innerText = 'Valid name, move to the next input.';
       labels[0].style.color = 'green';
       inputs[0].classList.add('success');
+
+      setTimeout(()=>{
+        labels[0].innerText = defaultLabelTexts[0];
+        labels[0].style.color = '';
+        inputs[0].classList.remove('success');
+      }, 5000);
     }
-}
+}; 
 
 const validateLastName = ()=>{
 
@@ -38,6 +45,13 @@ const validateLastName = ()=>{
       labels[1].innerText = 'Valid name, move to the next input.';
       labels[1].style.color = 'green';
       inputs[1].classList.add('success');
+
+      
+      setTimeout(()=>{
+        labels[1].innerText = defaultLabelTexts[1];
+        labels[1].style.color = '';
+        inputs[1].classList.remove('success');
+      }, 5000);
     }
   }
 
@@ -56,9 +70,17 @@ const validateUserName = ()=>{
     inputs[2].classList.remove('success');
     inputs[2].classList.add('fail');
   } else{
+    inputs[2].classList.remove('fail');
     labels[2].innerText = 'Valid user name';
     labels[2].style.color = 'green';
     inputs[2].classList.add('success');
+
+    
+    setTimeout(()=>{
+      labels[2].innerText = defaultLabelTexts[2];
+      labels[2].style.color = '';
+      inputs[2].classList.remove('success');
+    }, 5000);
   }
 
 
@@ -76,9 +98,17 @@ const validateEmail = ()=>{
     inputs[3].classList.remove('success');
     inputs[3].classList.add('fail');
   }else{
+    inputs[3].classList.remove('fail');
     labels[3].innerText = 'Valid email address';
     labels[3].style.color = 'green';
     inputs[3].classList.add('success');
+
+    
+    setTimeout(()=>{
+      labels[3].innerText = defaultLabelTexts[3];
+      labels[3].style.color = '';
+      inputs[3].classList.remove('success');
+    }, 5000);
   }
 }
 
@@ -104,6 +134,13 @@ const validatePassword = () => {
     labels[4].style.color = 'green';
     inputs[4].classList.remove('fail');
     inputs[4].classList.add('success');
+
+    
+    setTimeout(()=>{
+      labels[4].innerText = defaultLabelTexts[4];
+      labels[4].style.color = '';
+      inputs[4].classList.remove('success');
+    }, 5000);
   }
 };
 
@@ -114,6 +151,10 @@ inputs[2].addEventListener('input', validateUserName);
 inputs[3].addEventListener('input', validateEmail);
 inputs[4].addEventListener('input', validatePassword);
 
+
+const showMessage = (setTimeout(() => {
+  console.log('It works')
+}, 3000));
 
 /*
 
