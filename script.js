@@ -4,6 +4,7 @@ let labels = document.querySelectorAll('label');
 const inputs = document.querySelectorAll('input');
 
 const validateName = ()=>{
+
   let name = document.getElementById('first-name').value.trim();
   let namePattern = /^[A-Za-z]+$/;
   
@@ -11,9 +12,11 @@ const validateName = ()=>{
   if(name === '' || !namePattern.test(name)){
     labels[0].innerText = 'Enter a valid name';
     labels[0].style.color = 'red';
+    inputs[0].classList.remove('success');
     inputs[0].classList.add('fail');
     } 
     else{
+      
       labels[0].innerText = 'Valid name, move to the next input.';
       labels[0].style.color = 'green';
       inputs[0].classList.add('success');
@@ -21,12 +24,14 @@ const validateName = ()=>{
 }
 
 const validateLastName = ()=>{
+
   let lastName = inputs[1].value.trim();
   let lastNamePattern = /^[A-Za-z]+$/;
 
   if(lastName === '' || !lastNamePattern.test(lastName)){
     labels[1].innerText = 'Enter a valid name';
     labels[1].style.color = 'red';
+    inputs[1].classList.remove('success');
     inputs[1].classList.add('fail');
     } 
     else{
@@ -35,25 +40,34 @@ const validateLastName = ()=>{
       inputs[1].classList.add('success');
     }
   }
+
+
+let username = '';
+console.log(username.length);
  
 const validateEmail = ()=>{
-  let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  let email = inputs[3].value.trim();
 
-  if( email === '' || !email.test(emailPattern)){
+  let email = inputs[3].value.trim();
+  let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  
+
+  if( email === '' || !emailPattern.test(email)){
     labels[3].innerText = 'Enter a valid email address';
     labels[3].style.color = 'red';
+    inputs[3].classList.remove('success');
+    inputs[3].classList.add('fail');
   }else{
-    
     labels[3].innerText = 'Valid email address';
     labels[3].style.color = 'green';
+    inputs[3].classList.add('success');
   }
 }
 
 
 inputs[0].addEventListener('input', validateName)
 inputs[1].addEventListener('input', validateLastName);
-inputs[3].addEventListener('input',validaEmail);
+inputs[3].addEventListener('input', validateEmail
+)
 
 
 /*
