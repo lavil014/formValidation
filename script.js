@@ -41,10 +41,29 @@ const validateLastName = ()=>{
     }
   }
 
+const validateUserName = ()=>{
+  let userName = inputs[2].value.trim();
 
-let username = '';
-console.log(username.length);
- 
+  if( userName === ''){
+    labels[2].innerText = 'Username cannot be empty';
+    labels[2].style.color= 'red';
+    inputs[2].classList.remove('success');
+    inputs[2].classList.add('fail');
+
+  } else if(userName.length <8 || userName.length >16){
+    labels[2].innerText = 'Username must be between 8 and 16 characters';
+    labels[2].style.color = 'red';
+    inputs[2].classList.remove('success');
+    inputs[2].classList.add('fail');
+  } else{
+    labels[2].innerText = 'Valid user name';
+    labels[2].style.color = 'green';
+    inputs[2].classList.add('success');
+  }
+
+
+}
+
 const validateEmail = ()=>{
 
   let email = inputs[3].value.trim();
@@ -66,8 +85,8 @@ const validateEmail = ()=>{
 
 inputs[0].addEventListener('input', validateName)
 inputs[1].addEventListener('input', validateLastName);
-inputs[3].addEventListener('input', validateEmail
-)
+inputs[2].addEventListener('input', validateUserName);
+inputs[3].addEventListener('input', validateEmail);
 
 
 /*
