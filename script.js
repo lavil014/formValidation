@@ -13,20 +13,21 @@ const validateName = ()=>{
 
   if(name === '' || !namePattern.test(name)){
     labels[0].innerText = 'Enter a valid name';
-    labels[0].style.color = 'red';
+    labels[0].style.color = '#dc3545';
     inputs[0].classList.remove('success');
     inputs[0].classList.add('fail');
     } 
     else{
       
       labels[0].innerText = 'Valid name, move to the next input.';
-      labels[0].style.color = 'green';
+      labels[0].style.color = '#28a745';
       inputs[0].classList.add('success');
 
       setTimeout(()=>{
         labels[0].innerText = defaultLabelTexts[0];
         labels[0].style.color = '';
         inputs[0].classList.remove('success');
+        inputs[0].classList.remove('fail');
       }, 5000);
     }
 }; 
@@ -38,13 +39,13 @@ const validateLastName = ()=>{
 
   if(lastName === '' || !lastNamePattern.test(lastName)){
     labels[1].innerText = 'Enter a valid name';
-    labels[1].style.color = 'red';
+    labels[1].style.color = '#dc3545';
     inputs[1].classList.remove('success');
     inputs[1].classList.add('fail');
     } 
     else{
       labels[1].innerText = 'Valid name, move to the next input.';
-      labels[1].style.color = 'green';
+      labels[1].style.color = '#28a745';
       inputs[1].classList.add('success');
 
       
@@ -52,6 +53,7 @@ const validateLastName = ()=>{
         labels[1].innerText = defaultLabelTexts[1];
         labels[1].style.color = '';
         inputs[1].classList.remove('success');
+        inputs[1].classList.remove('fail');
       }, 5000);
     }
   }
@@ -61,19 +63,19 @@ const validateUserName = ()=>{
 
   if( userName === ''){
     labels[2].innerText = 'Username cannot be empty';
-    labels[2].style.color= 'red';
+    labels[2].style.color= '#dc3545';
     inputs[2].classList.remove('success');
     inputs[2].classList.add('fail');
 
   } else if(userName.length <8 || userName.length >16){
     labels[2].innerText = 'Username must be between 8 and 16 characters';
-    labels[2].style.color = 'red';
+    labels[2].style.color = '#dc3545';
     inputs[2].classList.remove('success');
     inputs[2].classList.add('fail');
   } else{
     inputs[2].classList.remove('fail');
     labels[2].innerText = 'Valid user name';
-    labels[2].style.color = 'green';
+    labels[2].style.color = '#28a745';
     inputs[2].classList.add('success');
 
     
@@ -95,7 +97,7 @@ const validateEmail = ()=>{
 
   if( email === '' || !emailPattern.test(email)){
     labels[3].innerText = 'Enter a valid email address';
-    labels[3].style.color = 'red';
+    labels[3].style.color = '#dc3545';
     inputs[3].classList.remove('success');
     inputs[3].classList.add('fail');
   }else{
@@ -120,19 +122,19 @@ const validatePassword = () => {
   if (password === '') {
     labels[4].classList.remove('valid-password');
     labels[4].innerText = 'Password cannot be empty';
-    labels[4].style.color = 'red';
+    labels[4].style.color = '#dc3545';
     inputs[4].classList.remove('success');
     inputs[4].classList.add('fail');
   } else if (!passwordPattern.test(password)) {
     labels[4].innerText = '8 characters long,uppercase, lowercase,a number, and a special character';
     labels[4].classList.add('valid-password')
-    labels[4].style.color = 'red';
+    labels[4].style.color = '#dc3545';
     inputs[4].classList.remove('success');
     inputs[4].classList.add('fail');
   } else {
     labels[4].classList.remove('valid-password');
     labels[4].innerText = 'Valid password';
-    labels[4].style.color = 'green';
+    labels[4].style.color = '#28a745';
     inputs[4].classList.remove('fail');
     inputs[4].classList.add('success');
 

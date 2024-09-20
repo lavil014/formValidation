@@ -53,15 +53,17 @@
   }
 
   .fail{
-   color: rgb(232, 7, 7);
-   border: solid rgb(249, 11, 11);
+   color: #dc3545;
+   border: solid #dc3545;
    outline: none;
+   background-color: #f8d7da;
   }
 
   .success{
-    color: #00ec5a;
-    border: solid #00ec5a;
+    color: #28a745;
+    border: solid #28a745;
     outline: none;
+    background-color: #e6f9e8;
   }
 
   .valid-password{
