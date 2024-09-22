@@ -5,6 +5,8 @@ const inputs = document.querySelectorAll('input');
 let defaultLabelTexts = Array.from(labels).map(label => label.innerText);
 
 
+
+
 const validateName = ()=>{
 
   let name = document.getElementById('first-name').value.trim();
