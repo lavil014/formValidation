@@ -15,7 +15,7 @@ const validationRules = {
       successMessage : 'Valid name, move to the next input.',
       failureMessage: 'Enter a valid name',
     },
-    'UserName':{
+    'userName':{
       patern: /^[A-Za-z]+$/,
       successMessage : 'Valid user name.',
       failureMessage: 'Username must be between 8 and 16 characters',
@@ -35,7 +35,7 @@ const validationRules = {
 }
 
 
-/* Update UI */
+/* Function to Update UI */
 
 const updateUI = (index, message, isValid)=>{
   labels[index].innerText = message;
@@ -45,10 +45,17 @@ const updateUI = (index, message, isValid)=>{
   inputs[index].classList.toggle('fail', !isValid);
 }
 
-/*Validate forms*/
+/* Function to validate inputs*/
 
-const validateInputs = (index,value, message)=>{
-  
+const validateInputs = (fieldName,index)=>{
+  let value = inputs[index].value.trim();
+  let rule = validationRules[fieldName];
+
 }
 
 /*Event listeners*/
+inputs[0].addEventListener('input', ()=>validateInputs('firstNme', 0))
+inputs[1].addEventListener('input', ()=>validateInputs('lstNme',1))
+inputs[2].addEventListener('input', ()=>validateInputs('userName',2))
+inputs[3].addEventListener('input', ()=>validateInputs('emil',3))
+inputs[4].addEventListener('input', ()=>validateInputs('pssword',4))
