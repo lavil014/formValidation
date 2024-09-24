@@ -7,158 +7,83 @@ let defaultLabelTexts = Array.from(labels).map(label => label.innerText);
 
 
 
-const validateName = ()=>{
-
-  let name = document.getElementById('first-name').value.trim();
-  let namePattern = /^[A-Za-z]+$/;
-  
-
-  if(name === '' || !namePattern.test(name)){
-    labels[0].innerText = 'Enter a valid name';
-    labels[0].style.color = '#dc3545';
-    inputs[0].classList.remove('success');
-    inputs[0].classList.add('fail');
-    } 
-    else{
-      
-      labels[0].innerText = 'Valid name, move to the next input.';
-      labels[0].style.color = '#28a745';
-      inputs[0].classList.add('success');
-
-      /*
-      
-      setTimeout(()=>{
-        labels[0].innerText = defaultLabelTexts[0];
-        labels[0].style.color = '';
-        inputs[0].classList.remove('success');
-        inputs[0].classList.remove('fail');
-      }, 5000);
-
-      */
+/* Object to validtion rules in inputs */
+const validationRules = { 
+    'firstNme' :{
+      pattern: /^[A-Za-z]+$/,
+      successMessage : 'Valid name, move to the next input.',
+      failureMessage: 'Enter a valid name',
+    },
+    'lstNme': {
+      pattern: /^[A-Za-z]+$/,
+      successMessage : 'Valid name, move to the next input.',
+      failureMessage: 'Enter a valid name',
+    },
+    'userName':{
+      pattern: /^[A-Za-z0-9!@#$%^&*()_+-]{8,16}$/,
+      successMessage : 'Valid user name.',
+      failureMessage: 'Username must be between 8 and 16 characters',
+    },
+    'emil':{
+      pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      successMessage : 'Valid email address.',
+      failureMessage: 'Enter a valid email address',
+    },
+    'pssword':{
+      pattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      successMessage : 'Valid password.',
+      emptyPsswordMessge: 'Password cannot be empty',
+      failureMessage: '8 characters long,uppercase, lowercase,a number, and a special character',
+      validPasswordClass: 'valid-password',
     }
-}; 
 
-const validateLastName = ()=>{
+}
 
-  let lastName = inputs[1].value.trim();
-  let lastNamePattern = /^[A-Za-z]+$/;
+/* Function to Update UI */
 
-  if(lastName === '' || !lastNamePattern.test(lastName)){
-    labels[1].innerText = 'Enter a valid name';
-    labels[1].style.color = '#dc3545';
-    inputs[1].classList.remove('success');
-    inputs[1].classList.add('fail');
-    } 
-    else{
-      labels[1].innerText = 'Valid name, move to the next input.';
-      labels[1].style.color = '#28a745';
-      inputs[1].classList.add('success');
+const updateUI = (index, message, isValid, customClass)=>{
+  labels[index].innerText = message;
+  labels[index].style.color = isValid ?'#28a745' : '#dc3545';
 
-      /*
-      setTimeout(()=>{
-        labels[1].innerText = defaultLabelTexts[1];
-        labels[1].style.color = '';
-        inputs[1].classList.remove('success');
-        inputs[1].classList.remove('fail');
-      }, 5000);*/
-    }
-  }
+  inputs[index].classList.toggle('success', isValid);
+  inputs[index].classList.toggle('fail', !isValid);
 
-const validateUserName = ()=>{
-  let userName = inputs[2].value.trim();
-
-  if( userName === ''){
-    labels[2].innerText = 'Username cannot be empty';
-    labels[2].style.color= '#dc3545';
-    inputs[2].classList.remove('success');
-    inputs[2].classList.add('fail');
-
-  } else if(userName.length <8 || userName.length >16){
-    labels[2].innerText = 'Username must be between 8 and 16 characters';
-    labels[2].style.color = '#dc3545';
-    inputs[2].classList.remove('success');
-    inputs[2].classList.add('fail');
+  if ( !isValid && inputs[index].value.trim() !== ''){
+    labels[4].classList.add('valid-password');
   } else{
-    inputs[2].classList.remove('fail');
-    labels[2].innerText = 'Valid user name';
-    labels[2].style.color = '#28a745';
-    inputs[2].classList.add('success');
-
-    /*
-    setTimeout(()=>{
-      labels[2].innerText = defaultLabelTexts[2];
-      labels[2].style.color = '';
-      inputs[2].classList.remove('success');
-    }, 5000);*/
+    labels[4].classList.remove('valid-password');
   }
-
-
 }
 
-const validateEmail = ()=>{
+/* Function to validate inputs*/
 
-  let email = inputs[3].value.trim();
-  let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  
+const validateInputs = (fieldName,index)=>{
+  const value = inputs[index].value.trim();
+  const rule = validationRules[fieldName];
 
-  if( email === '' || !emailPattern.test(email)){
-    labels[3].innerText = 'Enter a valid email address';
-    labels[3].style.color = '#dc3545';
-    inputs[3].classList.remove('success');
-    inputs[3].classList.add('fail');
+  if (fieldName === 'pssword' && value === ''){
+    updateUI(index, rule.emptyPsswordMessge, false, rule.validPasswordClass);
+    return;
+  }
+
+  const isValid = rule.pattern ? rule.pattern.test(value) : rule.validate(value);
+
+  if(!isValid){
+    updateUI(index,rule.failureMessage,false);
   }else{
-    inputs[3].classList.remove('fail');
-    labels[3].innerText = 'Valid email address';
-    labels[3].style.color = 'green';
-    inputs[3].classList.add('success');
-
-    /*
-    setTimeout(()=>{
-      labels[3].innerText = defaultLabelTexts[3];
-      labels[3].style.color = '';
-      inputs[3].classList.remove('success');
-    }, 5000);*/
+    updateUI(index,rule.successMessage, true);
   }
+
 }
 
-const validatePassword = () => {
-  let password = inputs[4].value.trim();
-  let passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+/*Event listeners*/
+inputs[0].addEventListener('input', ()=>validateInputs('firstNme', 0))
+inputs[1].addEventListener('input', ()=>validateInputs('lstNme',1))
+inputs[2].addEventListener('input', ()=>validateInputs('userName',2))
+inputs[3].addEventListener('input', ()=>validateInputs('emil',3))
+inputs[4].addEventListener('input', ()=>validateInputs('pssword',4))
 
-  if (password === '') {
-    labels[4].classList.remove('valid-password');
-    labels[4].innerText = 'Password cannot be empty';
-    labels[4].style.color = '#dc3545';
-    inputs[4].classList.remove('success');
-    inputs[4].classList.add('fail');
-  } else if (!passwordPattern.test(password)) {
-    labels[4].innerText = '8 characters long,uppercase, lowercase,a number, and a special character';
-    labels[4].classList.add('valid-password')
-    labels[4].style.color = '#dc3545';
-    inputs[4].classList.remove('success');
-    inputs[4].classList.add('fail');
-  } else {
-    labels[4].classList.remove('valid-password');
-    labels[4].innerText = 'Valid password';
-    labels[4].style.color = '#28a745';
-    inputs[4].classList.remove('fail');
-    inputs[4].classList.add('success');
-
-    /*    
-    setTimeout(()=>{
-      labels[4].innerText = defaultLabelTexts[4];
-      labels[4].style.color = '';
-      inputs[4].classList.remove('success');
-    }, 5000);*/
-  }
-};
-
-
-inputs[0].addEventListener('input', validateName)
-inputs[1].addEventListener('input', validateLastName);
-inputs[2].addEventListener('input', validateUserName);
-inputs[3].addEventListener('input', validateEmail);
-inputs[4].addEventListener('input', validatePassword);
+/*Function to validate form information is correct*/
 
 form.addEventListener('submit',(e)=>{
   let validForm = Array.from(inputs).every(input => input.classList.contains('success'));
@@ -167,12 +92,7 @@ form.addEventListener('submit',(e)=>{
     e.preventDefault();
     btn.innerText = 'Information is invalid';
     btn.style.backgroundColor = '#dc3545'; 
-  } 
+  } else if (validForm){
+    btn.innerText = 'Submit';
+  }
 })
-
-
-
-
-
-
-
