@@ -5,16 +5,7 @@ const inputs = document.querySelectorAll('input');
 let defaultLabelTexts = Array.from(labels).map(label => label.innerText);
 
 
-/* Function to Update UI */
 
-const updateUI = (index, message, isValid)=>{
-  labels[index].innerText = message;
-  labels[index].style.color = isValid ?'#28a745' : '#dc3545';
-
-  inputs[index].classList.toggle('success', isValid);
-  inputs[index].classList.toggle('fail', !isValid);
-  
-}
 
 /* Object to validtion rules in inputs */
 const validationRules = { 
@@ -23,13 +14,13 @@ const validationRules = {
       successMessage : 'Valid name, move to the next input.',
       failureMessage: 'Enter a valid name',
     },
-    'lstnme': {
+    'lstNme': {
       pattern: /^[A-Za-z]+$/,
       successMessage : 'Valid name, move to the next input.',
       failureMessage: 'Enter a valid name',
     },
     'userName':{
-      pattern: /^[A-Za-z]+$/,
+      pattern: /^[A-Za-z0-9!@#$%^&*()_+-]{8,16}$/,
       successMessage : 'Valid user name.',
       failureMessage: 'Username must be between 8 and 16 characters',
     },
@@ -40,7 +31,7 @@ const validationRules = {
     },
     'pssword':{
       pattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      successMessage : 'Valid email address.',
+      successMessage : 'Valid password.',
       emptyPsswordMessge: 'Password cannot be empty',
       failureMessage: '8 characters long,uppercase, lowercase,a number, and a special character',
       validPasswordClass: 'valid-password',
@@ -48,6 +39,21 @@ const validationRules = {
 
 }
 
+/* Function to Update UI */
+
+const updateUI = (index, message, isValid, customClass)=>{
+  labels[index].innerText = message;
+  labels[index].style.color = isValid ?'#28a745' : '#dc3545';
+
+  inputs[index].classList.toggle('success', isValid);
+  inputs[index].classList.toggle('fail', !isValid);
+
+  if ( !isValid && inputs[index].value.trim() !== ''){
+    labels[4].classList.add('valid-password');
+  } else{
+    labels[4].classList.remove('valid-password');
+  }
+}
 
 /* Function to validate inputs*/
 
@@ -56,8 +62,7 @@ const validateInputs = (fieldName,index)=>{
   const rule = validationRules[fieldName];
 
   if (fieldName === 'pssword' && value === ''){
-    updateUI(index, rule.emptyPsswordMessge, false);
-    updateUI(index, rule.validPasswordClass, false);
+    updateUI(index, rule.emptyPsswordMessge, false, rule.validPasswordClass);
     return;
   }
 
@@ -87,5 +92,7 @@ form.addEventListener('submit',(e)=>{
     e.preventDefault();
     btn.innerText = 'Information is invalid';
     btn.style.backgroundColor = '#dc3545'; 
-  } 
+  } else if (validForm){
+    btn.innerText = 'Submit';
+  }
 })
