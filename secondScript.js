@@ -5,8 +5,19 @@ const inputs = document.querySelectorAll('input');
 let defaultLabelTexts = Array.from(labels).map(label => label.innerText);
 
 
+/* Function to Update UI */
+
+const updateUI = (index, message, isValid)=>{
+  labels[index].innerText = message;
+  labels[index].style.color = isValid ?'#28a745' : '#dc3545';
+
+  inputs[index].classList.toggle('success', isValid);
+  inputs[index].classList.toggle('fail', !isValid);
+  
+}
+
 /* Object to validtion rules in inputs */
-const validationRules = {
+const validationRules = { 
     'firstNme' :{
       pattern: /^[A-Za-z]+$/,
       successMessage : 'Valid name, move to the next input.',
@@ -32,26 +43,23 @@ const validationRules = {
       successMessage : 'Valid email address.',
       emptyPsswordMessge: 'Password cannot be empty',
       failureMessage: '8 characters long,uppercase, lowercase,a number, and a special character',
+      validPasswordClass: 'valid-password',
     }
 
 }
 
-
-/* Function to Update UI */
-
-const updateUI = (index, message, isValid)=>{
-  labels[index].innerText = message;
-  labels[index].style.color = isValid ?'#28a745' : '#dc3545';
-
-  inputs[index].classList.toggle('success', isValid);
-  inputs[index].classList.toggle('fail', !isValid);
-}
 
 /* Function to validate inputs*/
 
 const validateInputs = (fieldName,index)=>{
   const value = inputs[index].value.trim();
   const rule = validationRules[fieldName];
+
+  if (fieldName === 'pssword' && value === ''){
+    updateUI(index, rule.emptyPsswordMessge, false);
+    updateUI(index, rule.validPasswordClass, false);
+    return;
+  }
 
   const isValid = rule.pattern ? rule.pattern.test(value) : rule.validate(value);
 
