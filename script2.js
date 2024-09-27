@@ -168,10 +168,6 @@ form.addEventListener('submit',(e)=>{
     btn.innerText = 'Information is invalid';
     btn.style.backgroundColor = '#dc3545'; 
   } 
-  
-  setTimeout(()=>{
-     console.log('It works');
-  }, 3000)
 })
 
 

@@ -92,7 +92,5 @@ form.addEventListener('submit',(e)=>{
     e.preventDefault();
     btn.innerText = 'Information is invalid';
     btn.style.backgroundColor = '#dc3545'; 
-  } else if (validForm){
-    btn.innerText = 'Submit';
-  }
+  } 
 })
